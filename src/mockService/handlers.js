@@ -1,11 +1,11 @@
 // See: https://mswjs.io/docs/getting-started/mocks/rest-api
 import { rest } from "msw";
-import createGameSuccess from "./responses/createGameSuccess.json";
-import variantsSuccess from "./responses/variantsSuccess.json";
+import createVariantSuccess from "./responses/createVariantSuccess.json";
+import serviceTypesSuccess from "./responses/serviceTypesSuccess.json";
 import { serviceURL } from "../store/service";
 
-const variantsUrl = `${serviceURL}Variants`;
-const createGameUrl = `${serviceURL}Game`;
+const serviceTypesUrl = `${serviceURL}service-types`;
+const createVariantUrl = `${serviceURL}variant`;
 
 const internalServerError = (req, res, ctx) => {
   return res(ctx.status(500), ctx.delay(mockServiceLatency));
@@ -15,43 +15,42 @@ const internalServerError = (req, res, ctx) => {
 const mockServiceLatency = 2000;
 
 const resolvers = {
-  createGame: {
+  createVariant: {
     success: (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.delay(mockServiceLatency),
-        ctx.json(createGameSuccess)
+        ctx.json(createVariantSuccess)
       );
     },
   },
-  variants: {
+  serviceTypes: {
     success: (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.delay(mockServiceLatency),
-        ctx.json(variantsSuccess)
+        ctx.json(serviceTypesSuccess)
       );
     },
   },
 };
 
 export const handlers = {
-  createGame: {
-    success: rest.post(createGameUrl, resolvers.createGame.success),
-    internalServerError: rest.post(createGameUrl, internalServerError),
+  createVariant: {
+    success: rest.post(createVariantUrl, resolvers.createVariant.success),
+    internalServerError: rest.post(createVariantUrl, internalServerError),
   },
-  variants: {
-    success: rest.get(variantsUrl, resolvers.variants.success),
-    internalServerError: rest.get(variantsUrl, internalServerError),
+  serviceTypes: {
+    success: rest.get(serviceTypesUrl, resolvers.serviceTypes.success),
+    internalServerError: rest.get(serviceTypesUrl, internalServerError),
   },
 };
 
 export const handlersList = [
-
   // Comment out these two lines to cause service to return error
-  handlers.createGame.success,
-  handlers.variants.success,
+  handlers.createVariant.success,
+  handlers.serviceTypes.success,
 
-  handlers.createGame.internalServerError,
-  handlers.variants.internalServerError,
+  handlers.createVariant.internalServerError,
+  handlers.serviceTypes.internalServerError,
 ];

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateGameMutation } from "../hooks/service";
+import { useCreateVariantMutation } from "../hooks/service";
 
 type FormData = {
   name: string;
@@ -15,14 +15,14 @@ const initialData: FormData = {
   variant: "",
 };
 
-const CreateGameForm = (): React.ReactElement => {
+const CreateVariantForm = (): React.ReactElement => {
   const [formData, setFormData] = useState<FormData>(initialData);
-  const [createGame, { isLoading, isError, isSuccess, data }] =
-    useCreateGameMutation();
+  const [createVariant, { isLoading, isError, isSuccess, data }] =
+    useCreateVariantMutation();
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    void createGame(formData);
+    void createVariant(formData);
   };
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -42,13 +42,13 @@ const CreateGameForm = (): React.ReactElement => {
           />
         </label>
         <input type="submit" value="Submit" />
-        {isLoading && <div>Creating game...</div>}
+        {isLoading && <div>Creating variant...</div>}
         {isError && <div>An error occurred</div>}
-        {isSuccess && <div>Game created successfully!</div>}
+        {isSuccess && <div>Variant created successfully!</div>}
         {data && (
           <>
             <div>
-              <strong>Your new game:</strong>
+              <strong>Your new variant:</strong>
             </div>
             <div>ID: {data.id}</div>
             <div>Name: {data.name}</div>
@@ -60,4 +60,4 @@ const CreateGameForm = (): React.ReactElement => {
   );
 };
 
-export default CreateGameForm;
+export default CreateVariantForm;

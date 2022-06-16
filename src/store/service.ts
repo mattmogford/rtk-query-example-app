@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { selectToken } from "./selectors";
 import { RootState } from "./store";
-import { Headers, NewGame, Game, Variant } from "./types";
+import { Headers, NewVariant, Variant, ServiceType } from "./types";
 
 export const serviceURL = "https://fake-url.com/";
 
-export const diplomacyService = createApi({
-  reducerPath: "diplomacyService",
+export const myAPIService = createApi({
+  reducerPath: "myAPIService",
   baseQuery: fetchBaseQuery({
     baseUrl: serviceURL,
     prepareHeaders: (headers, { getState }) => {
@@ -22,12 +22,12 @@ export const diplomacyService = createApi({
     mode: "cors",
   }),
   endpoints: (builder) => ({
-    listVariants: builder.query<Variant[], undefined>({
-      query: () => "/Variants",
+    listServiceTypes: builder.query<ServiceType[], undefined>({
+      query: () => "/service-types",
     }),
-    createGame: builder.mutation<Game, NewGame>({
+    createVariant: builder.mutation<Variant, NewVariant>({
       query: (body) => ({
-        url: "/Game",
+        url: "/variant",
         method: "POST",
         body,
       }),

@@ -1,13 +1,13 @@
-// POST data required when creating a new game
-export type NewGame = {
+// POST data required when creating a new variant
+export type NewVariant = {
   name: string;
   description: string;
   private: boolean;
   variant: string;
 };
 
-// An existing game
-export type Game = NewGame & {
+// An existing variant
+export type Variant = NewVariant & {
   finished: boolean;
   id: string;
   started: boolean;
@@ -16,7 +16,7 @@ export type Game = NewGame & {
   finishedAt: string;
 };
 
-export type Variant = {
+export type ServiceType = {
   name: string;
   createdBy: string;
   description: string;

@@ -1,3 +1,4 @@
-import { diplomacyService } from "../store/service";
+import { myAPIService } from "../store/service";
 
-export const { useListVariantsQuery, useCreateGameMutation } = diplomacyService;
+export const { useListServiceTypesQuery, useCreateVariantMutation } =
+  myAPIService;

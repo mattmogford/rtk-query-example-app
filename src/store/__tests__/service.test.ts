@@ -1,23 +1,23 @@
 import fetchMock from "jest-fetch-mock";
-import { diplomacyService, serviceURL } from "../service";
+import { myAPIService, serviceURL } from "../service";
 import { Headers } from "../types";
-import { game, variant, newGame } from "../testData";
+import { variant, serviceType, newVariant } from "../testData";
 import authReducer from "../auth";
 import { setupApiStore } from "../testUtils";
-import { actions as authActions } from "../auth";
+import { authActions } from "../auth";
 
 beforeEach((): void => {
   fetchMock.resetMocks();
 });
 
-describe("ListVariants", () => {
-  const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+describe("ListServiceTypes", () => {
+  const storeRef = setupApiStore(myAPIService, { auth: authReducer });
   fetchMock.mockResponse(JSON.stringify({}));
 
   test("request is correct", () => {
     return storeRef.store
       .dispatch<any>(
-        diplomacyService.endpoints.listVariants.initiate(undefined)
+        myAPIService.endpoints.listServiceTypes.initiate(undefined)
       )
       .then(() => {
         expect(fetchMock).toBeCalledTimes(1);
@@ -27,18 +27,18 @@ describe("ListVariants", () => {
         const authorization = headers.get(Headers.Authorization);
 
         expect(method).toBe("GET");
-        expect(url).toBe(`${serviceURL}Variants`);
+        expect(url).toBe(`${serviceURL}service-types`);
         expect(accept).toBe("application/json");
         expect(authorization).toBeNull();
       });
   });
   test("successful response", () => {
-    const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
     fetchMock.mockResponse(JSON.stringify([variant]));
 
     return storeRef.store
       .dispatch<any>(
-        diplomacyService.endpoints.listVariants.initiate(undefined)
+        myAPIService.endpoints.listServiceTypes.initiate(undefined)
       )
       .then((action: any) => {
         const { status, data, isSuccess } = action;
@@ -48,12 +48,12 @@ describe("ListVariants", () => {
       });
   });
   test("unsuccessful response", () => {
-    const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
     fetchMock.mockReject(new Error("Internal Server Error"));
 
     return storeRef.store
       .dispatch<any>(
-        diplomacyService.endpoints.listVariants.initiate(undefined)
+        myAPIService.endpoints.listServiceTypes.initiate(undefined)
       )
       .then((action: any) => {
         const {
@@ -68,52 +68,52 @@ describe("ListVariants", () => {
   });
 });
 
-describe("CreateGame", () => {
+describe("CreateVariant", () => {
   test("request is correct", () => {
-    const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
     const testToken = "test-123";
-    storeRef.store.dispatch(authActions.login(testToken));
+    storeRef.store.dispatch(authActions.login({ token: testToken }));
     fetchMock.mockResponse(JSON.stringify({}));
     return storeRef.store
-      .dispatch<any>(diplomacyService.endpoints.createGame.initiate(newGame))
+      .dispatch<any>(myAPIService.endpoints.createVariant.initiate(newVariant))
       .then(() => {
         expect(fetchMock).toBeCalledTimes(1);
         const request = fetchMock.mock.calls[0][0] as Request;
         const { method, headers, url } = request;
 
         void request.json().then((data) => {
-          expect(data).toStrictEqual(newGame);
+          expect(data).toStrictEqual(newVariant);
         });
 
         const accept = headers.get(Headers.Accept);
         const authorization = headers.get(Headers.Authorization);
 
         expect(method).toBe("POST");
-        expect(url).toBe(`${serviceURL}Game`);
+        expect(url).toBe(`${serviceURL}variant`);
         expect(accept).toBe("application/json");
         expect(authorization).toBe(`Bearer ${testToken}`);
       });
   });
   test("successful response", () => {
-    const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
     const testToken = "test-123";
-    storeRef.store.dispatch(authActions.login(testToken));
-    fetchMock.mockResponse(JSON.stringify(game));
+    storeRef.store.dispatch(authActions.login({ token: testToken }));
+    fetchMock.mockResponse(JSON.stringify(variant));
 
     return storeRef.store
-      .dispatch<any>(diplomacyService.endpoints.createGame.initiate(newGame))
+      .dispatch<any>(myAPIService.endpoints.createVariant.initiate(newVariant))
       .then((action: any) => {
         const { data } = action;
-        expect(data).toStrictEqual(game);
+        expect(data).toStrictEqual(variant);
       });
   });
   test("unsuccessful response", () => {
-    const storeRef = setupApiStore(diplomacyService, { auth: authReducer });
+    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
     fetchMock.mockReject(new Error("Internal Server Error"));
 
     return storeRef.store
       .dispatch<any>(
-        diplomacyService.endpoints.listVariants.initiate(undefined)
+        myAPIService.endpoints.listServiceTypes.initiate(undefined)
       )
       .then((action: any) => {
         const {

@@ -4,3 +4,6 @@ import { useAppSelector } from "./store";
 
 export const useToken = (): string | undefined =>
   useAppSelector(selectors.selectToken);
+
+export const useSecret = (): string | undefined =>
+  useAppSelector(selectors.selectSecret);

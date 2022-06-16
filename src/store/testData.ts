@@ -1,11 +1,11 @@
 import { RootState } from "./store";
-import { Game, NewGame, Variant } from "./types";
+import { NewVariant, ServiceType, Variant } from "./types";
 
 export const initialState: RootState = {
   auth: {
     isLoggedIn: false,
   },
-  diplomacyService: {
+  myAPIService: {
     queries: {},
     mutations: {},
     provided: {},
@@ -17,21 +17,24 @@ export const initialState: RootState = {
       online: true,
       focused: true,
       middlewareRegistered: false,
-      reducerPath: "diplomacyService",
+      reducerPath: "myAPIService",
       keepUnusedDataFor: 60,
     },
   },
+  myArea: {
+    secret: undefined,
+  },
 };
 
-export const newGame: NewGame = {
-  name: "Game",
+export const newVariant: NewVariant = {
+  name: "Variant",
   description: "Description",
   private: false,
   variant: "Classical",
 };
 
-export const game: Game = {
-  ...newGame,
+export const variant: Variant = {
+  ...newVariant,
   finished: false,
   id: "",
   started: false,
@@ -40,7 +43,7 @@ export const game: Game = {
   finishedAt: "",
 };
 
-export const variant: Variant = {
+export const serviceType: ServiceType = {
   name: "Classical",
   createdBy: "Player",
   description: "Description",
