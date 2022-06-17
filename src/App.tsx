@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import CreateVariantForm from "./components/CreateVariantForm";
 import MyArea from "./components/MyArea";
 import ServiceTypesList from "./components/ServiceTypesList";
 import { useAppDispatch } from "./hooks/store";
+import { RootState } from "./store";
 import { authActions } from "./store/auth";
 
 const App = (): React.ReactElement => {
@@ -10,16 +12,18 @@ const App = (): React.ReactElement => {
   const [createVariantFormOpen, setCreateVariantFormOpen] = useState(false);
 
   const dispatch = useAppDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   return (
     <div className="App">
       <button
         onClick={() => {
-          console.log("login");
-          dispatch(authActions.login({ token: "MY_TOKEN" }));
+          isLoggedIn
+            ? dispatch(authActions.logout())
+            : dispatch(authActions.login({ token: "MY_TOKEN" }));
         }}
       >
-        Login
+        {isLoggedIn ? "Logout" : "Login"}
       </button>
 
       <hr />
