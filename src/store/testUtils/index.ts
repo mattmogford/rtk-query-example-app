@@ -7,6 +7,8 @@ import {
   Reducer,
 } from "@reduxjs/toolkit";
 
+export type SetupApiStoreReturnType = { api: any; store: EnhancedStore };
+
 export function setupApiStore<
   A extends {
     reducer: Reducer<any, any>;
@@ -15,7 +17,7 @@ export function setupApiStore<
     util: { resetApiState(): any };
   },
   R extends Record<string, Reducer<any, any>> = Record<never, never>
->(api: A, extraReducers?: R): { api: any; store: EnhancedStore } {
+>(api: A, extraReducers?: R): SetupApiStoreReturnType {
   /*
    * Modified version of RTK Query's helper function:
    * https://github.com/reduxjs/redux-toolkit/blob/master/packages/toolkit/src/query/tests/helpers.tsx
