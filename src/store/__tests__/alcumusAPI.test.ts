@@ -16,7 +16,7 @@ describe("ListServiceTypes", () => {
 
   test("request is correct", () => {
     return storeRef.store
-      .dispatch<any>(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
+      .dispatch(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
       .then(() => {
         expect(fetchMock).toBeCalledTimes(1);
         const { method, headers, url } = fetchMock.mock.calls[0][0] as Request;
