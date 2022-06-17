@@ -1,5 +1,5 @@
 import { setupApiStore } from "../testUtils";
-import { myAPIService } from "../service";
+import { alcumusAPI } from "../services/alcumusAPI";
 import authReducer, { authActions } from "../auth";
 
 const testToken = "test-token-123";
@@ -9,7 +9,7 @@ window.localStorage.__proto__.setItem = jest.fn();
 
 describe("Auth actions", () => {
   test("login", () => {
-    const { store } = setupApiStore(myAPIService, { auth: authReducer });
+    const { store } = setupApiStore(alcumusAPI, { auth: authReducer });
     const stateBeforeAction = store.getState();
     store.dispatch(authActions.login({ token: testToken }));
     const stateAfterAction = store.getState();

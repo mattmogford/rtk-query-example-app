@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 
 import auth from "./auth";
 import myArea from "./myArea";
-import { myAPIService } from "./service";
+import { alcumusAPI } from "./services/alcumusAPI";
 
 export default combineReducers({
   auth,
-  [myAPIService.reducerPath]: myAPIService.reducer,
+  [alcumusAPI.reducerPath]: alcumusAPI.reducer,
   myArea,
 });

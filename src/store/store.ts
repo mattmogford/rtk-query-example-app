@@ -2,11 +2,11 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import reducer from "./reducer";
-import { myAPIService } from "./service";
+import { alcumusAPI } from "./services/alcumusAPI";
 
 export const store = configureStore({
   reducer,
-  middleware: (gdm) => [...gdm().concat(myAPIService.middleware)],
+  middleware: (gdm) => [...gdm().concat(alcumusAPI.middleware)],
 });
 
 setupListeners(store.dispatch);

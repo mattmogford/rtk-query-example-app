@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { selectToken } from "./selectors";
-import { RootState } from "./store";
-import { Headers, NewVariant, Variant, ServiceType } from "./types";
+import { selectToken } from "../../selectors";
+import { RootState } from "../../store";
+import { Headers, NewVariant, Variant, ServiceType } from "../../types";
 
 export const serviceURL = "https://fake-url.com/";
 
-export const myAPIService = createApi({
-  reducerPath: "myAPIService",
+export const alcumusAPI = createApi({
+  reducerPath: "alcumusAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: serviceURL,
     prepareHeaders: (headers, { getState }) => {

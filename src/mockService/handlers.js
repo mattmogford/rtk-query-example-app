@@ -2,7 +2,7 @@
 import { rest } from "msw";
 import createVariantSuccess from "./responses/createVariantSuccess.json";
 import serviceTypesSuccess from "./responses/serviceTypesSuccess.json";
-import { serviceURL } from "../store/service";
+import { serviceURL } from "../store/services/alcumusAPI";
 
 const serviceTypesUrl = `${serviceURL}service-types`;
 const createVariantUrl = `${serviceURL}variant`;

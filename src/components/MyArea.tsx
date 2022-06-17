@@ -1,6 +1,6 @@
 import React from "react";
 import { useSecret } from "../hooks/selectors";
-import { useListServiceTypesQuery } from "../hooks/service";
+import { useListServiceTypesQuery } from "../hooks/alcumusAPI";
 import { useAppDispatch } from "../hooks/store";
 import { myAreaActions } from "../store/myArea";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCreateVariantMutation } from "../hooks/service";
+import { useCreateVariantMutation } from "../hooks/alcumusAPI";
 
 type FormData = {
   name: string;

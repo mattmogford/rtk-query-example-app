@@ -1,5 +1,5 @@
 import fetchMock from "jest-fetch-mock";
-import { myAPIService, serviceURL } from "../service";
+import { alcumusAPI, serviceURL } from "../services/alcumusAPI";
 import { Headers } from "../types";
 import { variant, serviceType, newVariant } from "../testData";
 import authReducer from "../auth";
@@ -11,14 +11,12 @@ beforeEach((): void => {
 });
 
 describe("ListServiceTypes", () => {
-  const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+  const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
   fetchMock.mockResponse(JSON.stringify({}));
 
   test("request is correct", () => {
     return storeRef.store
-      .dispatch<any>(
-        myAPIService.endpoints.listServiceTypes.initiate(undefined)
-      )
+      .dispatch<any>(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
       .then(() => {
         expect(fetchMock).toBeCalledTimes(1);
         const { method, headers, url } = fetchMock.mock.calls[0][0] as Request;
@@ -33,13 +31,11 @@ describe("ListServiceTypes", () => {
       });
   });
   test("successful response", () => {
-    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+    const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     fetchMock.mockResponse(JSON.stringify([variant]));
 
     return storeRef.store
-      .dispatch<any>(
-        myAPIService.endpoints.listServiceTypes.initiate(undefined)
-      )
+      .dispatch<any>(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
       .then((action: any) => {
         const { status, data, isSuccess } = action;
         expect(status).toBe("fulfilled");
@@ -48,13 +44,11 @@ describe("ListServiceTypes", () => {
       });
   });
   test("unsuccessful response", () => {
-    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+    const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     fetchMock.mockReject(new Error("Internal Server Error"));
 
     return storeRef.store
-      .dispatch<any>(
-        myAPIService.endpoints.listServiceTypes.initiate(undefined)
-      )
+      .dispatch<any>(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
       .then((action: any) => {
         const {
           status,
@@ -70,12 +64,12 @@ describe("ListServiceTypes", () => {
 
 describe("CreateVariant", () => {
   test("request is correct", () => {
-    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+    const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     const testToken = "test-123";
     storeRef.store.dispatch(authActions.login({ token: testToken }));
     fetchMock.mockResponse(JSON.stringify({}));
     return storeRef.store
-      .dispatch<any>(myAPIService.endpoints.createVariant.initiate(newVariant))
+      .dispatch<any>(alcumusAPI.endpoints.createVariant.initiate(newVariant))
       .then(() => {
         expect(fetchMock).toBeCalledTimes(1);
         const request = fetchMock.mock.calls[0][0] as Request;
@@ -95,26 +89,24 @@ describe("CreateVariant", () => {
       });
   });
   test("successful response", () => {
-    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+    const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     const testToken = "test-123";
     storeRef.store.dispatch(authActions.login({ token: testToken }));
     fetchMock.mockResponse(JSON.stringify(variant));
 
     return storeRef.store
-      .dispatch<any>(myAPIService.endpoints.createVariant.initiate(newVariant))
+      .dispatch<any>(alcumusAPI.endpoints.createVariant.initiate(newVariant))
       .then((action: any) => {
         const { data } = action;
         expect(data).toStrictEqual(variant);
       });
   });
   test("unsuccessful response", () => {
-    const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+    const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     fetchMock.mockReject(new Error("Internal Server Error"));
 
     return storeRef.store
-      .dispatch<any>(
-        myAPIService.endpoints.listServiceTypes.initiate(undefined)
-      )
+      .dispatch<any>(alcumusAPI.endpoints.listServiceTypes.initiate(undefined))
       .then((action: any) => {
         const {
           status,

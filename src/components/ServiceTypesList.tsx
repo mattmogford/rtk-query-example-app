@@ -1,5 +1,5 @@
 import React from "react";
-import { useListServiceTypesQuery } from "../hooks/service";
+import { useListServiceTypesQuery } from "../hooks/alcumusAPI";
 
 const ServiceTypesList = (): React.ReactElement => {
   const { data, isLoading, isError } = useListServiceTypesQuery(undefined);

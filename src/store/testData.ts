@@ -5,7 +5,7 @@ export const initialState: RootState = {
   auth: {
     isLoggedIn: false,
   },
-  myAPIService: {
+  alcumusAPI: {
     queries: {},
     mutations: {},
     provided: {},
@@ -17,7 +17,7 @@ export const initialState: RootState = {
       online: true,
       focused: true,
       middlewareRegistered: false,
-      reducerPath: "myAPIService",
+      reducerPath: "alcumusAPI",
       keepUnusedDataFor: 60,
     },
   },

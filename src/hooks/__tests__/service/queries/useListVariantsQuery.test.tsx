@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { variant } from "../../../../store/testData";
-import { useListServiceTypesQuery } from "../../../service";
+import { useListServiceTypesQuery } from "../../../alcumusAPI";
 import {
   TestHookWrapper,
   TEST_HOOK_UPDATE_TIMEOUT,

@@ -1,13 +1,13 @@
 import React from "react";
 import { Provider } from "react-redux";
 import authReducer from "../../../store/auth";
-import { myAPIService } from "../../../store/service";
+import { alcumusAPI } from "../../../store/services/alcumusAPI";
 import { setupApiStore } from "../../../store/testUtils";
 
 export const TEST_HOOK_UPDATE_TIMEOUT = 5000;
 
 export const TestHookWrapper: React.FC = ({ children }) => {
-  const storeRef = setupApiStore(myAPIService, { auth: authReducer });
+  const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
   return <Provider store={storeRef.store}>{children}</Provider>;
 };
 

@@ -6,7 +6,7 @@ import {
 
 import { act } from "@testing-library/react-hooks";
 import { variant, newVariant } from "../../../../store/testData";
-import { useCreateVariantMutation } from "../../../service";
+import { useCreateVariantMutation } from "../../../alcumusAPI";
 
 beforeEach((): void => {
   fetchMock.resetMocks();
