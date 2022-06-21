@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { selectToken } from "../../selectors";
 import { RootState } from "../../store";
-import { Headers, NewVariant, Variant, ServiceType } from "../../types";
+import { Headers } from "../../types";
+import { getMutations } from "./mutations";
+import { getQueries } from "./queries";
 
 export const serviceURL = "https://fake-url.com/";
 
@@ -22,15 +24,7 @@ export const alcumusAPI = createApi({
     mode: "cors",
   }),
   endpoints: (builder) => ({
-    listServiceTypes: builder.query<ServiceType[], undefined>({
-      query: () => "/service-types",
-    }),
-    createVariant: builder.mutation<Variant, NewVariant>({
-      query: (body) => ({
-        url: "/variant",
-        method: "POST",
-        body,
-      }),
-    }),
+    ...getQueries(builder),
+    ...getMutations(builder),
   }),
 });
