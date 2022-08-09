@@ -6,6 +6,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-      run: yarn install
+      run: npm install
     - name: Run tests
-      run: yarn --watchAll=false
+      run: npm run test --watchAll=false
