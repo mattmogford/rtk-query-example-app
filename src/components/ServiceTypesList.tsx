@@ -6,14 +6,13 @@ const ServiceTypesList = (): React.ReactElement => {
 
   return (
     <>
-      {isLoading && <span>Loading variants...</span>}
+      {isLoading && <span>Loading Service Types...</span>}
       {isError && <span>An error occurred</span>}
       {data &&
         data.map((serviceType) => (
           <div key={serviceType.name}>
             <div>Name: {serviceType.name}</div>
             <div>Description: {serviceType.description}</div>
-            <div>Created by: {serviceType.createdBy}</div>
           </div>
         ))}
     </>

@@ -5,28 +5,28 @@ import {
 } from "../serviceTestSetup.test";
 
 import { act } from "@testing-library/react-hooks";
-import { variant, newVariant } from "../../../../store/testData";
-import { useCreateVariantMutation } from "../../../alcumusAPI";
+import { newServiceType, serviceType } from "../../../../store/testData";
+import { useCreateServiceTypeMutation } from "../../../alcumusAPI";
 
 beforeEach((): void => {
   fetchMock.resetMocks();
 });
 
-describe("useCreateVariantMutation", () => {
+describe("useCreateServiceTypeMutation", () => {
   it("Success", async () => {
-    fetchMock.mockResponse(JSON.stringify(variant));
+    fetchMock.mockResponse(JSON.stringify(serviceType));
     const { result, waitForNextUpdate } = renderHook(
-      () => useCreateVariantMutation(undefined),
+      () => useCreateServiceTypeMutation(undefined),
       {
         wrapper: TestHookWrapper,
       }
     );
-    const [createVariant, initialResponse] = result.current;
+    const [createServiceType, initialResponse] = result.current;
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(false);
 
     act(() => {
-      void createVariant(newVariant);
+      void createServiceType(newServiceType);
     });
 
     const loadingResponse = result.current[1];
@@ -44,17 +44,17 @@ describe("useCreateVariantMutation", () => {
   it("Internal Server Error", async () => {
     fetchMock.mockReject(new Error("Internal Server Error"));
     const { result, waitForNextUpdate } = renderHook(
-      () => useCreateVariantMutation(undefined),
+      () => useCreateServiceTypeMutation(undefined),
       {
         wrapper: TestHookWrapper,
       }
     );
-    const [createVariant, initialResponse] = result.current;
+    const [createServiceType, initialResponse] = result.current;
     expect(initialResponse.data).toBeUndefined();
     expect(initialResponse.isLoading).toBe(false);
 
     act(() => {
-      void createVariant(newVariant);
+      void createServiceType(newServiceType);
     });
 
     const loadingResponse = result.current[1];

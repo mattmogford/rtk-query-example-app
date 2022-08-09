@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import { useCreateVariantMutation } from "../hooks/alcumusAPI";
+import { useCreateServiceTypeMutation } from "../hooks/alcumusAPI";
 
 type FormData = {
   name: string;
   description: string;
-  private: boolean;
-  variant: string;
 };
 
 const initialData: FormData = {
   name: "",
   description: "",
-  private: false,
-  variant: "",
 };
 
-const CreateVariantForm = (): React.ReactElement => {
+const CreateServiceTypeForm = (): React.ReactElement => {
   const [formData, setFormData] = useState<FormData>(initialData);
-  const [createVariant, { isLoading, isError, isSuccess, data }] =
-    useCreateVariantMutation();
+  const [createServiceType, { isLoading, isError, isSuccess, data }] =
+    useCreateServiceTypeMutation();
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    void createVariant(formData);
+    void createServiceType(formData);
   };
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -42,15 +38,14 @@ const CreateVariantForm = (): React.ReactElement => {
           />
         </label>
         <input type="submit" value="Submit" />
-        {isLoading && <div>Creating variant...</div>}
+        {isLoading && <div>Creating Service Type...</div>}
         {isError && <div>An error occurred</div>}
-        {isSuccess && <div>Variant created successfully!</div>}
+        {isSuccess && <div>Service Type created successfully!</div>}
         {data && (
           <>
             <div>
-              <strong>Your new variant:</strong>
+              <strong>Your new service type:</strong>
             </div>
-            <div>ID: {data.id}</div>
             <div>Name: {data.name}</div>
             <div>Description: {data.description}</div>
           </>
@@ -60,4 +55,4 @@ const CreateVariantForm = (): React.ReactElement => {
   );
 };
 
-export default CreateVariantForm;
+export default CreateServiceTypeForm;

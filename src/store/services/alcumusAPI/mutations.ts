@@ -1,10 +1,10 @@
-import { NewVariant, Variant } from "../../types";
+import { NewServiceType, ServiceType } from "../../types";
 import { APIEndpointBuilder } from "./types";
 
 export const getMutations = (builder: APIEndpointBuilder) => ({
-  createVariant: builder.mutation<Variant, NewVariant>({
+  createServiceType: builder.mutation<ServiceType, NewServiceType>({
     query: (body) => ({
-      url: "/variant",
+      url: "/service-type",
       method: "POST",
       body,
     }),

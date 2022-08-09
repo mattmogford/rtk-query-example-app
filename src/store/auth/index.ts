@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type Auth = {
-  token?: string;
   isLoggedIn: boolean;
+  token?: string;
 };
 
 const initialState: Auth = { isLoggedIn: false };

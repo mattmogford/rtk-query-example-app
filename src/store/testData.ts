@@ -1,5 +1,5 @@
 import { RootState } from "./store";
-import { NewVariant, ServiceType, Variant } from "./types";
+import { NewServiceType, ServiceType } from "./types";
 
 export const initialState: RootState = {
   auth: {
@@ -21,31 +21,14 @@ export const initialState: RootState = {
       keepUnusedDataFor: 60,
     },
   },
-  myArea: {
-    secret: undefined,
-  },
 };
 
-export const newVariant: NewVariant = {
-  name: "Variant",
-  description: "Description",
-  private: false,
-  variant: "Classical",
-};
-
-export const variant: Variant = {
-  ...newVariant,
-  finished: false,
-  id: "",
-  started: false,
-  createdAt: "",
-  startedAt: "",
-  finishedAt: "",
+export const newServiceType: NewServiceType = {
+  name: "New Service Type",
+  description: "New Service Type Description",
 };
 
 export const serviceType: ServiceType = {
-  name: "Classical",
-  createdBy: "Player",
-  description: "Description",
-  orderTypes: [],
+  name: "ST1",
+  description: "ST1 Description",
 };

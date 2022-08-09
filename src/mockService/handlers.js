@@ -1,11 +1,11 @@
 // See: https://mswjs.io/docs/getting-started/mocks/rest-api
 import { rest } from "msw";
-import createVariantSuccess from "./responses/createVariantSuccess.json";
+import createServiceTypeSuccess from "./responses/createServiceTypeSuccess.json";
 import serviceTypesSuccess from "./responses/serviceTypesSuccess.json";
 import { serviceURL } from "../store/services/alcumusAPI";
 
 const serviceTypesUrl = `${serviceURL}service-types`;
-const createVariantUrl = `${serviceURL}variant`;
+const createServiceTypeUrl = `${serviceURL}service-type`;
 
 const internalServerError = (req, res, ctx) => {
   return res(ctx.status(500), ctx.delay(mockServiceLatency));
@@ -15,12 +15,12 @@ const internalServerError = (req, res, ctx) => {
 const mockServiceLatency = 2000;
 
 const resolvers = {
-  createVariant: {
+  createServiceType: {
     success: (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.delay(mockServiceLatency),
-        ctx.json(createVariantSuccess)
+        ctx.json(createServiceTypeSuccess)
       );
     },
   },
@@ -36,9 +36,12 @@ const resolvers = {
 };
 
 export const handlers = {
-  createVariant: {
-    success: rest.post(createVariantUrl, resolvers.createVariant.success),
-    internalServerError: rest.post(createVariantUrl, internalServerError),
+  createServiceType: {
+    success: rest.post(
+      createServiceTypeUrl,
+      resolvers.createServiceType.success
+    ),
+    internalServerError: rest.post(createServiceTypeUrl, internalServerError),
   },
   serviceTypes: {
     success: rest.get(serviceTypesUrl, resolvers.serviceTypes.success),
@@ -48,9 +51,9 @@ export const handlers = {
 
 export const handlersList = [
   // Comment out these two lines to cause service to return error
-  handlers.createVariant.success,
+  handlers.createServiceType.success,
   handlers.serviceTypes.success,
 
-  handlers.createVariant.internalServerError,
+  handlers.createServiceType.internalServerError,
   handlers.serviceTypes.internalServerError,
 ];

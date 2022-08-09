@@ -1,8 +1,6 @@
 [
   {
-    "name": "Classical",
-    "createdBy": "Player",
-    "description": "Description",
-    "orderTypes": []
+    "name": "ST1",
+    "description": "ST1 Description"
   }
 ]

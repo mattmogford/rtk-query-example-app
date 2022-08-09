@@ -1,7 +1,7 @@
 import fetchMock from "jest-fetch-mock";
 import authReducer, { authActions } from "../auth";
 import { alcumusAPI, serviceURL } from "../services/alcumusAPI";
-import { newVariant, variant } from "../testData";
+import { newServiceType, serviceType } from "../testData";
 import { setupApiStore, SetupApiStoreReturnType } from "../testUtils";
 import { Headers } from "../types";
 
@@ -35,7 +35,7 @@ describe("ListServiceTypes", () => {
   });
   test("successful response", () => {
     const storeRef = setupApiStore<any, any>(alcumusAPI, { auth: authReducer });
-    fetchMock.mockResponse(JSON.stringify([variant]));
+    fetchMock.mockResponse(JSON.stringify([serviceType]));
 
     return dispatch(
       storeRef,
@@ -44,7 +44,7 @@ describe("ListServiceTypes", () => {
       const { status, data, isSuccess } = action;
       expect(status).toBe("fulfilled");
       expect(isSuccess).toBe(true);
-      expect(data).toStrictEqual([variant]);
+      expect(data).toStrictEqual([serviceType]);
     });
   });
   test("unsuccessful response", () => {
@@ -67,7 +67,7 @@ describe("ListServiceTypes", () => {
   });
 });
 
-describe("CreateVariant", () => {
+describe("CreateServiceType", () => {
   test("request is correct", () => {
     const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     const testToken = "test-123";
@@ -75,21 +75,21 @@ describe("CreateVariant", () => {
     fetchMock.mockResponse(JSON.stringify({}));
     return dispatch(
       storeRef,
-      alcumusAPI.endpoints.createVariant.initiate(newVariant)
+      alcumusAPI.endpoints.createServiceType.initiate(newServiceType)
     ).then(() => {
       expect(fetchMock).toBeCalledTimes(1);
       const request = fetchMock.mock.calls[0][0] as Request;
       const { method, headers, url } = request;
 
       void request.json().then((data) => {
-        expect(data).toStrictEqual(newVariant);
+        expect(data).toStrictEqual(newServiceType);
       });
 
       const accept = headers.get(Headers.Accept);
       const authorization = headers.get(Headers.Authorization);
 
       expect(method).toBe("POST");
-      expect(url).toBe(`${serviceURL}variant`);
+      expect(url).toBe(`${serviceURL}service-type`);
       expect(accept).toBe("application/json");
       expect(authorization).toBe(`Bearer ${testToken}`);
     });
@@ -98,14 +98,14 @@ describe("CreateVariant", () => {
     const storeRef = setupApiStore(alcumusAPI, { auth: authReducer });
     const testToken = "test-123";
     dispatch(storeRef, authActions.login({ token: testToken }));
-    fetchMock.mockResponse(JSON.stringify(variant));
+    fetchMock.mockResponse(JSON.stringify(serviceType));
 
     return dispatch(
       storeRef,
-      alcumusAPI.endpoints.createVariant.initiate(newVariant)
+      alcumusAPI.endpoints.createServiceType.initiate(newServiceType)
     ).then((action: any) => {
       const { data } = action;
-      expect(data).toStrictEqual(variant);
+      expect(data).toStrictEqual(serviceType);
     });
   });
   test("unsuccessful response", () => {

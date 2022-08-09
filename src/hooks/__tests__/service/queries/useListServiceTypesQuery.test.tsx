@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { variant } from "../../../../store/testData";
+import { serviceType } from "../../../../store/testData";
 import { useListServiceTypesQuery } from "../../../alcumusAPI";
 import {
   TestHookWrapper,
@@ -10,9 +10,9 @@ beforeEach((): void => {
   fetchMock.resetMocks();
 });
 
-describe("useListVariantsQuery", () => {
+describe("useListServiceTypesQuery", () => {
   it("Success", async () => {
-    fetchMock.mockResponse(JSON.stringify([variant]));
+    fetchMock.mockResponse(JSON.stringify([serviceType]));
     const { result, waitForNextUpdate } = renderHook(
       () => useListServiceTypesQuery(undefined),
       { wrapper: TestHookWrapper }
