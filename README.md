@@ -4,9 +4,9 @@ This is an example app to demonstrate adding basic tests to a simple [RTK Query]
 
 ## Tests
 
-* The test script [here][service-tests] provides an approach for adding basic tests to your RTK Query service. The tests cover success and error scenarios a query endpoint and a mutation endpoint.
-* The test script [here][hooks-tests] provides an approach for adding tests for your RTK Query service's automatically generated React hooks.
-* There are some [other tests][tests-dir] which demonstrate testing basic redux functionality like selectors and actions.
+- The test script [here][service-tests] provides an approach for adding basic tests to your RTK Query service. The tests cover success and error scenarios a query endpoint and a mutation endpoint.
+- The test script [here][hooks-tests] provides an approach for adding tests for your RTK Query service's automatically generated React hooks.
+- There are some [other tests][tests-dir] which demonstrate testing basic redux functionality like selectors and actions.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ In the project root run `yarn test`.
 
 This project includes a very primitive applcation which exercises the RTK Query implementation. The implementation uses [MSW][msw] as a mock service. You can alter the behavior of the mock service [here][handlers]
 
-In the project root run `yarn start`. The application will be available on port 3000 by default.
+In the project root run `yarn start`. The application will be available on port 3000 by default
 
 [rtk-query]: https://redux-toolkit.js.org/rtk-query/overview
 [msw]: https://mswjs.io/
